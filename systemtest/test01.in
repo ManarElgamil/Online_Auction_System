@@ -1,0 +1,19 @@
+auction 10 15 10 first
+auction 20 25 5 second
+bidder Alice
+bidder Bob
+bidder Charmaine
+open 1
+open 2
+bid 11 1 10
+bid 24 1 15
+bid 12 2 20
+bid 11 2 25
+bid 20 3 5
+bid 20 1 8
+bid 20 2 12
+close 1
+close 2
+owed
+quit
+

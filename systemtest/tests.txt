@@ -1,0 +1,4 @@
+00 A basic auction flow with one auction, one bidder, and the auction opens and closes.  Check who won each lot.
+01 Have mutliple bidders(3) bidding on mulitple auctions (2).  See how much each bidder owes at the end.
+02 Try to create two auctions whose lot numbers overlap.  Expect the second auction's creation to fail.
+03 Create multiple auctions (4) with multiple bidders (3), leave auctions in different states

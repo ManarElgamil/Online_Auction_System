@@ -1,0 +1,6 @@
+auction 10 20 5 auction
+auction 15 30 10 second
+open 1
+status
+quit
+
