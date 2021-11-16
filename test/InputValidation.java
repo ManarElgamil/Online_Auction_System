@@ -29,6 +29,7 @@ class InputValidation {
         Auction test5 = new Auction( lotList, bidderList,"test3", 10, -1, 1);
         assertFalse( test5.auctionIsReady() );
 
+
         Auction test6 = new Auction( lotList, bidderList,"test4", 10, 0, 1);
         assertFalse( test6.auctionIsReady() );
 

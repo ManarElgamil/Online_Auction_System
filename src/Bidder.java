@@ -24,6 +24,7 @@ public class Bidder {
         return bidderNumber;
     }
 
+
     public String feesOwed() {
         String owed = "";
         int won = 0;
@@ -34,14 +35,16 @@ public class Bidder {
             if (theLot.isClosed() && (theLot.winningBidder() == bidderNumber)) {
                 // Add this lot to what's reported.
                 won++;
-                cost = theLot.currentBid();
+                cost += theLot.currentBid();
             }
         }
 
         owed = bidderName + "\t" + won + "\t" + cost + "\n";
 
         return owed;
+
     }
+
 
     public boolean bidderIsReady() {
         return bidderReady;

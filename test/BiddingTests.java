@@ -34,6 +34,7 @@ class BiddingTests {
         assertTrue(newAuction.openAuction());
 
         Lot aLot = lots.get( 10 );
+        //shouldn't this not be accepted? since it is below the minBid. so how is it acceptable
         assertEquals(2, aLot.placeBid(1, newBidder.getBidderId() ));
 
         assertEquals("10\t0\t0\n11\t0\t0\n12\t0\t0\n13\t0\t0\n14\t0\t0\n15\t0\t0\n", newAuction.winningBids(), "Bid is below minimum bid");

@@ -177,4 +177,8 @@ public class TestHarness {
             userInput.close();
         }
     }
+    /*
+    Notes
+    -in the create auction command, it is always null, it never actually creates the bidder
+     */
 }

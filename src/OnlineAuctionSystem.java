@@ -9,7 +9,7 @@ public class OnlineAuctionSystem {
     private HashMap<Integer, Lot> lots = null;  // all the lots among the auctions
 
     public OnlineAuctionSystem( ) {
-        // Create places to store all fo the auctions, all of the bidders, and all of the auction lots.
+        // Create places to store all of the auctions, all of the bidders, and all of the auction lots.
 
         auctions = new ArrayList<Auction>();
         bidders = new ArrayList<Bidder>();
@@ -26,7 +26,7 @@ public class OnlineAuctionSystem {
             int lotStart = anAuction.getMinLot();
             int lotEnd = anAuction.getMaxLot();
 
-            if (!((lastLotNumber < lotStart) && (firstLotNumber > lotEnd))) {
+            if (!((firstLotNumber > lotEnd ) || (lastLotNumber < lotStart))) {
                 distinctLotRange = false;
                 break;
             }
@@ -61,7 +61,7 @@ public class OnlineAuctionSystem {
         if (theBidder.bidderIsReady()) {
             // Make space for the bidder if we don't already have space reserved
 
-            if (bidders != null) {
+            if (bidders == null) {
                 bidders = new ArrayList<>();
             }
 
@@ -79,13 +79,10 @@ public class OnlineAuctionSystem {
 
 	    // Gather the status information from each of the individual auctions that we know about
 
-        Iterator<Auction> iterate = auctions.iterator();
-
-        auction = iterate.next();
-        while (iterate.hasNext()) {
-
-            // The status line is the auction name, the state, and the total bids, separated by tabs and ending with
-            // a carriage return.
+        //replaced while loop with this for loop which is easier to follow, and ensures that all the elements of
+        //auctions have been looped over
+        for (int i = 0; i < auctions.size(); i++) {
+            auction = auctions.get(i);
 
             status = status + auction.getAuctionName() + "\t";
 
@@ -98,12 +95,11 @@ public class OnlineAuctionSystem {
             }
 
             status = status + auction.auctionBidTotal() + "\n";
-
-            auction = iterate.next();
         }
 
         return status;
-    }
+
+     }
 
     public int placeBid( int lotNumber, int bidderId, int bid ) {
         int outcome = Lot.LotNotAccepting;
@@ -122,12 +118,11 @@ public class OnlineAuctionSystem {
 
     public String feesOwed( ) {
         String owed = "";
-        Bidder person = null;
 
 	    // Each bidder knows what they owe, so gather the status from them directly
 
-        for (Iterator<Bidder> iterate = bidders.iterator(); iterate.hasNext(); person = iterate.next() ) {
-            owed += person.feesOwed();
+        for (int i = 0; i < bidders.size(); i++) {
+            owed += bidders.get(i).feesOwed();
         }
 
         return owed;

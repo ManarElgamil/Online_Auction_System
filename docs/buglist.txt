@@ -19,67 +19,79 @@ Bug 0:
 	Cause: incorrect initialization of bidderReady that assumed the creation of the bidder succeeded
 	Fix:  default bidderReady vaule to false
 
+    P.S. (for the first 5 bugs, the line number of the bug, are the one in the assignment before
+        I added the fixes, not the current code )
 Bug 1:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Fix:
+  Class: Lot.java
+	Method: placeBid()
+	Line: 60
+	Cause: bidder is always valid
+	Fix: created an array to hold all the bidderIds, and the checked to see if the bidderId, passed in
+	the parameters exists or not.
 
 Bug 2:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Fix:
+  Class: Lot.java
+	Method: isClosed()
+	Line: 95
+	Cause: this statement: !theAuction.auctionIsOpen(), was causing the isClosed method to return false,
+	when it was true and vice versa
+	Fix: theAuction.auctionIsClosed()
 
 Bug 3:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Fix:
+  Class: Bidder.java
+	Method: feesOwed()
+	Line: 37
+	Cause: the cost of the previous lots was never added to the new cost, it was only reinitialized,
+	because of the = sign
+	Fix: added += instead of =, so that it would add all the costs
 
 Bug 4:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Fix:
+  Class: Lot.java
+	Method: placeBid()
+	Line: 81
+	Cause: never checks if the bid is bigger than minimum bid increment
+	Fix: added if statements to check if the bid is bigger than the minimum bid increment
 
 
 
 BUGS FOUND AND FIXED USING EXPECTED INPUT (at least 1):
 
 Bug 5:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Fix:
+  Class: OnlineAuctionSystem
+	Method: createAuction
+	Line: 29
+	Cause: In this condition: !((lastLotNumber < lotStart) && (firstLotNumber > lotEnd)), the
+	lotStart and the firstLotNumber are switched.
+	Fix: They should be switched back to form this condition  ((lastLotNumber < firstLotNumber) && (lott > lotStarEnd))
 
 
 BUGS FOUND USING EXPECTED INPUT BUT NOT EASILY FIXED (2-3):
 
 Bug 6:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Reason not Fixed:
+  Class: OnlineAuctionSystem
+	Method: createBidder
+	Line: 65
+	Cause: In this condition: if (bidders != null) {  bidders = new ArrayList<>(); }
+	Fix: It should be if (bidders == null) {  bidders = new ArrayList<>(); }
+
 
 Bug 7:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Reason not fixed:
+  Class: OnlineAuctionSystem
+	Method: feesOwed()
+	Line: 127
+	Cause: setting person (Bidder) = null, causes a null pointer exception
+	Fix: Instead I removed the person variable and created a for loop that loops over the elements
+	of the bidders ArrayList without having to make a person or an Iterator Object.
+
 
 Bug 8:
-  Class:
-	Method:
-	Line:
-	Cause:
-	Reason not fixed:
+  Class: OnlineAuctionSystem
+	Method: auctionStatus()
+	Line: 103
+	Cause: never goes inside the while loop, because of the input test, which made an array of size 1, and so
+	iterate.hasNext() would be false in this condition
+	Fix: Instead I replaced the while loop, with a for loop, and ensured that it is looping over all the auctions
+	in the auctions arrayList.
+
 
 

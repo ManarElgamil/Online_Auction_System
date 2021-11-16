@@ -25,12 +25,11 @@ public class Auction {
     private boolean auctionReady = false;
 
     public Auction( Map<Integer, Lot> auctionLots, List<Bidder> allBidders, String auctionName, int firstLotNumber, int lastLotNumber, int minBidIncrement ) {
-        if ((firstLotNumber > 0) && (auctionName != null) && (auctionName.length() > 0) && (minBidIncrement > 0)) {
+        if ((firstLotNumber > 0) && (lastLotNumber > 0) && (auctionName != null) && (auctionName.length() > 0) && (minBidIncrement > 0)) {
             this.auctionName = auctionName;
             this.lotStart = firstLotNumber;
             this.lotEnd = lastLotNumber;
             this.minIncrement = minBidIncrement;
-            this.state = NewAuction;
             this.lotSet = auctionLots;
             this.bidderSet = allBidders;
 
@@ -42,7 +41,12 @@ public class Auction {
             // Make the lots for the auction
 
             for(int i = lotStart; i <= lotEnd; i++) {
-                Lot newLot = new Lot( this, allBidders, i );
+                Lot newLot = new Lot( this, bidderSet, i );
+                lotSet.put( i, newLot );
+            }
+
+            for (int i = lotStart; i <= lotEnd; i++) {
+                Lot newLot = new Lot( this, bidderSet, i );
                 lotSet.put( i, newLot );
             }
 
@@ -51,10 +55,12 @@ public class Auction {
     }
 
     public boolean openAuction( ) {
+
         boolean opened = false;
 
         if (state == NewAuction) {
             state = OpenAuction;
+            opened = true;
         }
 
         return opened;
@@ -65,6 +71,8 @@ public class Auction {
 
         if (state == OpenAuction) {
             state = ClosedAuction;
+            closed = true;
+
         }
 
         return closed;
@@ -91,7 +99,7 @@ public class Auction {
 
         // Find out all the bids
 
-        for(int lot = lotStart; lot < lotEnd; lot++ ) {
+        for(int lot = lotStart; lot <= lotEnd; lot++ ) {
             bids += lotSet.get(lot).currentBid();
         }
 

@@ -35,6 +35,7 @@ class DataFlowTests {
         assertTrue( theAuction.closeAuction() );
         assertEquals( 0, lot3.placeBid( 10, theBidder.getBidderId()  ) );
 
+
     }
 
     @Test

@@ -85,6 +85,7 @@ class ControlFlowTests {
         // Show that valid bids are still possible
         assertEquals( 3, lot2.placeBid( 1, bidder1.getBidderId() ));
         assertEquals( 3, lot6.placeBid( 1, bidder2.getBidderId() ));
+
     }
 
     @Test
@@ -236,7 +237,9 @@ class ControlFlowTests {
 
         Lot aLot = lots.get( 15 );
 
+        System.out.println(aLot.isClosed());
         assertFalse( aLot.isClosed() );
+
 
         auction1.openAuction();
         assertFalse( aLot.isClosed() );
